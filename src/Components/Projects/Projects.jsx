@@ -1,54 +1,75 @@
-import React from "react";
-import ProjectCard from "./ProjectCard";
-import weatherApp from "../../assets/weatherApp.png";
-import managementApp from "../../assets/weatherApp.png";
-import adAgency from "../../assets/dictionaryApp.png";
-import dictionaryApp from "../../assets/dictionaryApp.png";
+"use client";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { fadeUp, staggerContainer } from "../../animations";
+import image4 from "../../assets/dictionaryApp.png";
+import image2 from "../../assets/weatherApp.png";
 
-const Projects = () => {
-    const projectData = [
+export default function Projects() {
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.15 });
+
+    const projects = [
         {
-            image: weatherApp,
             title: "Weather Forecast App",
-            description: "A live weather forecast web app with city search and temp trends.",
+            desc: "Real-time weather conditions and 7-day forecast by city search.",
+            img: image2,
             link: "#",
-            borderColor: "border-green-500",
         },
         {
-            image: managementApp,
             title: "Task Management System",
-            description: "A React-based project management dashboard with real-time charts.",
+            desc: "Organize tasks visually with drag + drop workflow boards.",
+            img: image4,
             link: "#",
-            borderColor: "border-purple-500",
         },
         {
-            image: adAgency,
             title: "Marketing Agency Landing Page",
-            description: "Responsive landing page design for a Facebook marketing agency.",
+            desc: "Elegant responsive landing page with smooth motion effects.",
+            img: image2,
             link: "#",
-            borderColor: "border-blue-500",
         },
         {
-            image: dictionaryApp,
             title: "Dictionary Web App",
-            description: "A simple dictionary app that fetches word meanings and pronunciations.",
+            desc: "Search word meanings with phonetics and audio pronunciation.",
+            img: image4,
             link: "#",
-            borderColor: "border-indigo-500",
-        },
+        }
     ];
 
     return (
-        <section id="projects" className="bg-black text-white py-16 px-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+        <section id="projects" ref={ref} className="min-h-screen bg-[#0A0A1A] text-white flex flex-col items-center justify-start py-24 px-6">
+            <motion.h2
+                variants={fadeUp}
+                initial="hidden"
+                animate={inView ? "show" : "hidden"}
+                className="text-5xl font-bold mb-16 text-[#7B61FF]"
+            >
                 My Projects
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                {projectData.map((proj, index) => (
-                    <ProjectCard key={index} {...proj} />
+            </motion.h2>
+
+            <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                animate={inView ? "show" : "hidden"}
+                className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl w-full"
+            >
+                {projects.map((p, i) => (
+                    <motion.div
+                        key={i}
+                        variants={fadeUp}
+                        className="rounded-3xl overflow-hidden border border-[#7B61FF]/30 bg-gradient-to-br from-[#111133] to-[#1B1B2F] hover:scale-[1.03] transition-transform duration-700 backdrop-blur-md shadow-[0_0_35px_-5px_rgba(123,97,255,0.3)]"
+                    >
+                        <img src={p.img} alt={p.title} className="w-full h-64 object-cover" />
+
+                        <div className="p-6">
+                            <h3 className="text-2xl font-semibold mb-3 text-[#D9D9FF]">{p.title}</h3>
+                            <p className="text-gray-300 mb-5">{p.desc}</p>
+                            <a href={p.link} className="text-[#7B61FF] font-medium hover:text-[#9D84FF] transition">
+                                View Project →
+                            </a>
+                        </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
         </section>
     );
-};
-
-export default Projects;
+}

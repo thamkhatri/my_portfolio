@@ -3,7 +3,8 @@ import me from "../assets/me.png";
 
 export default function Hero() {
     return (
-        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0a0a1a] via-[#111133] to-[#1b1b2f] overflow-hidden text-white">
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0a0a1a] via-[#111133] to-[#1b1b2f] overflow-hidden text-white py-24">
+
             {/* Background glow */}
             <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#7B61FF]/20 blur-[120px]" />
             <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-[#2E8FFF]/20 blur-[100px]" />
@@ -37,7 +38,7 @@ export default function Hero() {
                             View My Work
                         </a>
                         <a
-                            href="#contact"
+                            href="#Contact"
                             className="px-6 py-3 border border-[#7B61FF] rounded-xl font-medium hover:bg-[#7B61FF]/10 transition"
                         >
                             Contact Me
@@ -88,7 +89,7 @@ export default function Hero() {
             </div>
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a]/60 to-transparent pointer-events-none" />
+            {/* <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a]/60 to-transparent pointer-events-none" /> */}
         </section>
     );
 }
